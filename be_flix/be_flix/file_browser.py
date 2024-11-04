@@ -21,24 +21,31 @@ class MovieObject():
         self.image = ""
 
 class FileManagerDb():
-    def __init__(self):
+    def __init__(self, _path: Path):
         self.obj_db = {}
+        if _path is not None:
+            load_dir(_path)
 
     def add(self, obj: MovieObject):
         _id = uuid.uuid4()
         self.obj_db.update({str(_id): obj})
 
 
-    def scan_dir(self, path: Path):
+    def get(self, id: str) -> MovieObject:
+        return self.obj_db[id]
+
+
+    def load_dir(self, path: Path):
         for file in path.iterdir():
             if file.is_file() and file.suffix in MOVIETYPE:
                 movie_obj = MovieObject(name=file.stem, path=file)
                 self.add(movie_obj)
 
+
 @app.command()
 def setup(input: Path):
     db = FileManagerDb()
-    db.scan_dir(input)
+    db.load_dir(input)
     print(db.obj_db)
 
 if __name__ == "__main__":

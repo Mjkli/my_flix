@@ -9,30 +9,30 @@ import json
 import websockets
 import socket
 from flask import Flask
-from be_flix.file_browser import FileManagerDb
-
 
 app = Flask(__name__)
 
+class RestServer():
+    def __init__(self):
+        self.app = Flask(__name__)
 
+    @app.route('/', methods=['GET'])
+    def index(self):
+        return json.dumps({'item': 1})
 
-@app.route('/', methods=['GET'])
-def index():
-    return json.dumps({'item': 1})
+    @app.route('/get_port', methods=['GET'])
+    def get_port(self):
+        return json.dumps({'print': "get_port"})
 
-@app.route('/get_port', methods=['GET'])
-def get_port():
-    return json.dumps({'print': "get_port"})
-
-@app.route('/request_websocket', methods=['GET'])
-def get_websocket():
-    # start websocket thread to interactwith and close after use
-    return json.dumps({})
+    @app.route('/request_websocket', methods=['GET'])
+    def get_websocket(self):
+        # start websocket thread to interactwith and close after use
+        return json.dumps({})
 
 
 def rest_server():
-    app.run(debug=True)
-
+    rest = RestServer()
+    rest.app.run(debug=True)
 
 if __name__ == '__main__':
     rest_server()

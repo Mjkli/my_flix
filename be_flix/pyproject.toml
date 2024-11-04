@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "be-flix"
+version = "0.1.0"
+description = ""
+authors = ["anthony <anthonybruno63@yahoo.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.3"
+typer = "^0.12.5"
+pathlib = "^1.0.1"
+uuid = "^1.30"
+websockets = "^13.1"
+asyncio = "^3.4.3"
+multiprocess = "^0.70.17"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "be-flix"
+name = "rest-api"
 version = "0.1.0"
 description = ""
 authors = ["anthony <anthonybruno63@yahoo.com>"]
@@ -7,10 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-flask = "^3.0.3"
-pathlib = "^1.0.1"
-uuid = "^1.30"
-rest_api = {path="../libraries/rest_api"}
+fastapi = "^0.115.4"
+asyncio = "^3.4.3"
+uvicorn = "^0.32.0"
+
 
 [build-system]
 requires = ["poetry-core"]

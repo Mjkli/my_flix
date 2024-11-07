@@ -3,13 +3,11 @@
 # create MovieObjects to store in the FileManagerDB
 
 
-import typer
 import uuid
 from pathlib import Path
 
 
 
-app = typer.Typer()
 
 MOVIETYPE = set([".mp4", ".avi"])
 
@@ -24,7 +22,7 @@ class FileManagerDb():
     def __init__(self, _path: Path):
         self.obj_db = {}
         if _path is not None:
-            load_dir(_path)
+            self.load_dir(_path)
 
     def add(self, obj: MovieObject):
         _id = uuid.uuid4()
@@ -36,18 +34,21 @@ class FileManagerDb():
 
 
     def load_dir(self, path: Path):
+        
         for file in path.iterdir():
             if file.is_file() and file.suffix in MOVIETYPE:
                 movie_obj = MovieObject(name=file.stem, path=file)
                 self.add(movie_obj)
 
 
-@app.command()
-def setup(input: Path):
-    db = FileManagerDb()
-    db.load_dir(input)
-    print(db.obj_db)
+# @app.command()
+# def setup(input: Path):
+#     db = FileManagerDb()
+#     db.load_dir(input)
+#     print(db.obj_db)
 
 if __name__ == "__main__":
+    import typer
+    app = typer.Typer()
     app()
 
